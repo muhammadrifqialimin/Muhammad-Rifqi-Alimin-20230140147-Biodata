@@ -39,6 +39,7 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 nav a {
@@ -69,6 +70,7 @@ main {
 main h2 {
   margin-bottom: 15px;
   color: #a5b4fc;
+  text-align: center;
 }
 
 main p,
@@ -91,13 +93,9 @@ ul li::before {
   margin-right: 8px;
 }
 
-form input[type="text"],
-form input[type="email"],
-form input[type="submit"],
-form input[type="button"],
-form input[type="radio"],
-form input[type="checkbox"] {
-  margin-bottom: 15px;
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 form input[type="text"],
@@ -106,6 +104,17 @@ form input[type="email"] {
   padding: 10px;
   border: none;
   border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+form label {
+  display: block;
+  margin: 5px 0 3px;
+}
+
+form input[type="checkbox"],
+form input[type="radio"] {
+  margin-right: 8px;
 }
 
 form input[type="submit"],
@@ -117,16 +126,13 @@ form input[type="button"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 15px;
 }
 
 form input[type="submit"]:hover,
 form input[type="button"]:hover {
   background-color: #3730a3;
-}
-
-form label {
-  display: block;
-  margin: 5px 0 3px;
 }
 
 footer {
@@ -139,7 +145,7 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Responsive tweaks */
+/* Mobile Responsive */
 @media (max-width: 600px) {
   header h1 {
     font-size: 1.5rem;
