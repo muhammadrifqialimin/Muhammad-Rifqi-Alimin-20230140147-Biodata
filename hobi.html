@@ -6,9 +6,17 @@
     <title>Hobi Saya</title>
     <link rel="stylesheet" href="style.css" />
     <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #000;
+        color: white;
+      }
+
       #hasilHobi {
         margin-top: 20px;
-        color: white;
+        padding: 15px;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
       }
 
       .hobi-item {
@@ -19,6 +27,10 @@
 
       .hobi-item input[type="checkbox"] {
         margin-right: 10px;
+      }
+
+      #hasilHobi ul {
+        padding-left: 20px;
       }
     </style>
   </head>
@@ -35,85 +47,63 @@
 
     <main>
       <h2>Pilih Hobi Favorit Anda</h2>
-      <form onsubmit="tampilkanHobi(event)">
+      <form>
         <div class="hobi-item">
-          <input type="checkbox" id="menulis" name="hobi" value="Menulis" />
+          <input type="checkbox" id="menulis" value="Menulis" />
           <label for="menulis">Menulis</label>
         </div>
 
         <div class="hobi-item">
-          <input type="checkbox" id="membaca" name="hobi" value="Membaca" />
+          <input type="checkbox" id="membaca" value="Membaca" />
           <label for="membaca">Membaca</label>
         </div>
 
         <div class="hobi-item">
-          <input type="checkbox" id="ngoding" name="hobi" value="Ngoding" />
+          <input type="checkbox" id="ngoding" value="Ngoding" />
           <label for="ngoding">Ngoding</label>
         </div>
 
         <div class="hobi-item">
-          <input type="checkbox" id="basket" name="hobi" value="Basket" />
+          <input type="checkbox" id="basket" value="Basket" />
           <label for="basket">Basket</label>
         </div>
 
         <div class="hobi-item">
-          <input type="checkbox" id="criket" name="hobi" value="Criket" />
+          <input type="checkbox" id="criket" value="Criket" />
           <label for="criket">Criket</label>
         </div>
 
         <div class="hobi-item">
-          <input type="checkbox" id="sepakbola" name="hobi" value="SepakBola" />
+          <input type="checkbox" id="sepakbola" value="SepakBola" />
           <label for="sepakbola">SepakBola</label>
         </div>
 
         <div class="hobi-item">
-          <input type="checkbox" id="memasak" name="hobi" value="Memasak" />
+          <input type="checkbox" id="memasak" value="Memasak" />
           <label for="memasak">Memasak</label>
         </div>
 
         <div class="hobi-item">
-          <input
-            type="checkbox"
-            id="bermaingame"
-            name="hobi"
-            value="BermainGame"
-          />
-          <label for="bermaingame">BermainGame</label>
+          <input type="checkbox" id="bermaingame" value="BermainGame" />
+          <label for="bermaingame">Bermain Game</label>
         </div>
 
         <div class="hobi-item">
-          <input type="checkbox" id="musik" name="hobi" value="Bermain Musik" />
+          <input type="checkbox" id="musik" value="BermainMusik" />
           <label for="musik">Bermain Musik</label>
         </div>
 
         <input type="submit" value="Simpan" />
       </form>
 
-      <div id="hasilHobi"></div>
+      <div id="hasilHobi">
+        <ul id="daftarHobi"></ul>
+      </div>
     </main>
 
     <footer>© 2025 Muhammad Rifqi Alimin_20230140147</footer>
 
-    <script>
-      function tampilkanHobi(event) {
-        event.preventDefault(); // mencegah form refresh halaman
-
-        const checkboxes = document.querySelectorAll(
-          'input[name="hobi"]:checked'
-        );
-        const hasilDiv = document.getElementById("hasilHobi");
-
-        if (checkboxes.length === 0) {
-          hasilDiv.innerHTML = "<p>Anda belum memilih hobi apa pun.</p>";
-        } else {
-          let hobiList = "<p>Hobi yang Anda pilih:</p><ul>";
-          checkboxes.forEach((cb) => {
-            hobiList += `<li>${cb.value}</li>`;
-          });
-          hobiList += "</ul>";
-          hasilDiv.innerHTML = hobiList;
-        }
-      }
-    </script>
+    <!-- Hubungkan dengan file JavaScript eksternal -->
+    <script src="script.js"></script>
   </body>
 </html>

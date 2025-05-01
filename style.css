@@ -73,12 +73,26 @@ main h2 {
   text-align: center;
 }
 
-main p,
-main ul,
-main li {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #f0f0f0;
+.hobi-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.hobi-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#hasilHobi {
+  margin: 20px auto 0;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  min-height: 150px;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  max-width: 90%;
+  width: 600px;
 }
 
 ul {
@@ -98,27 +112,7 @@ form {
   flex-direction: column;
 }
 
-form input[type="text"],
-form input[type="email"] {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 15px;
-}
-
-form label {
-  display: block;
-  margin: 5px 0 3px;
-}
-
-form input[type="checkbox"],
-form input[type="radio"] {
-  margin-right: 8px;
-}
-
-form input[type="submit"],
-form input[type="button"] {
+form input[type="submit"] {
   background-color: #4f46e5;
   color: white;
   padding: 10px 20px;
@@ -130,8 +124,7 @@ form input[type="button"] {
   margin-top: 15px;
 }
 
-form input[type="submit"]:hover,
-form input[type="button"]:hover {
+form input[type="submit"]:hover {
   background-color: #3730a3;
 }
 
@@ -151,29 +144,17 @@ footer {
     font-size: 1.5rem;
   }
 
-  nav {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-
   nav a {
     font-size: 0.9rem;
     padding: 6px 10px;
-    margin: 4px;
-    width: auto;
-    text-align: center;
   }
 
   main {
     margin: 20px 10px;
     padding: 20px;
-    width: auto;
   }
 
-  form input[type="submit"],
-  form input[type="button"] {
+  form input[type="submit"] {
     width: 100%;
     padding: 12px;
     font-size: 1rem;
@@ -181,6 +162,5 @@ footer {
 
   footer {
     font-size: 0.8rem;
-    padding: 15px 10px;
   }
 }
