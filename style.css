@@ -1,197 +1,793 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
+
+:root {
+  /* Color System */
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --primary-light: #818cf8;
+  --secondary: #a5b4fc;
+  --accent: #f59e0b;
+  --accent-dark: #d97706;
+  --accent-light: #fbbf24;
+  --text: #f8fafc;
+  --text-light: #e2e8f0;
+  --dark-bg: #0f0f19;
+  --darker-bg: #0a0a12;
+
+  /* Glass Morphism */
+  --glass: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03)
+  );
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* Effects */
+  --neon-glow: 0 0 15px rgba(99, 102, 241, 0.7),
+    0 0 30px rgba(99, 102, 241, 0.4);
+  --accent-glow: 0 0 15px rgba(245, 158, 11, 0.5);
+  --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  --border-radius: 20px;
+  --blur: blur(16px) saturate(200%);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 
 body {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: "Poppins", sans-serif;
-  background: url("https://wallpaperset.com/w/full/c/7/5/8581.jpg") no-repeat
-    center center fixed;
+  background: radial-gradient(
+      circle at 20% 30%,
+      rgba(99, 102, 241, 0.15) 0%,
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(245, 158, 11, 0.15) 0%,
+      transparent 30%
+    ),
+    linear-gradient(var(--dark-bg), var(--darker-bg)),
+    url("https://wallpaperset.com/w/full/c/7/5/8581.jpg") no-repeat center
+      center fixed;
   background-size: cover;
-  color: #f0f0f0;
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
 }
 
+/* Particle Background */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Header - Floating Glass Panel */
 header {
-  background-color: rgba(0, 0, 0, 0.85);
+  background: var(--glass);
   color: white;
-  padding: 25px 0;
+  padding: 2rem 0;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: var(--blur);
+  border-bottom: var(--glass-border);
+  transition: all 0.6s ease;
+}
+
+header.scrolled {
+  padding: 1.2rem 0;
+  background: rgba(15, 15, 25, 0.9);
 }
 
 header h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-shadow: var(--neon-glow);
+  position: relative;
+  display: inline-block;
+  animation: textGlow 3s ease-in-out infinite alternate;
 }
 
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.7);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.9),
+      0 0 30px rgba(245, 158, 11, 0.5);
+  }
+}
+
+header h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 4px;
+  filter: drop-shadow(0 0 8px var(--primary));
+  transition: all 0.6s ease;
+}
+
+header:hover h1::after {
+  width: 150px;
+  filter: drop-shadow(0 0 12px var(--primary));
+}
+
+header p {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* Navigation - Interactive Buttons */
 nav {
-  margin-top: 10px;
+  margin-top: 2rem;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 1.2rem;
 }
 
 nav a {
-  color: #ddd;
+  color: var(--text-light);
   text-decoration: none;
   font-weight: 600;
-  padding: 6px 12px;
-  transition: background-color 0.3s, color 0.3s;
-  border-radius: 5px;
+  padding: 0.8rem 1.8rem;
+  transition: var(--transition);
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border: var(--glass-border);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+nav a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.6s;
 }
 
 nav a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: white;
+  background: rgba(79, 70, 229, 0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3);
 }
 
+nav a:hover::before {
+  left: 100%;
+}
+
+nav a.active {
+  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+}
+
+/* Main Content - Floating Glass Card */
 main {
   flex: 1;
-  max-width: 850px;
-  background: rgba(0, 0, 0, 0.8);
-  margin: 40px auto;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7);
+  max-width: 1000px;
+  background: var(--glass);
+  margin: 4rem auto;
+  padding: 3.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: var(--blur);
+  border: var(--glass-border);
+  animation: floatIn 1s ease-out forwards,
+    float 8s ease-in-out infinite alternate;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px) rotateX(10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotate(0.5deg);
+  }
+  100% {
+    transform: translateY(-15px) rotate(-0.5deg);
+  }
+}
+
+main::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+      circle,
+      rgba(99, 102, 241, 0.1) 0%,
+      transparent 70%
+    ),
+    radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%);
+  animation: rotate 25s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 main h2 {
-  margin-bottom: 15px;
-  color: #a5b4fc;
+  margin-bottom: 2.5rem;
+  color: var(--text);
   text-align: center;
+  font-size: 2.2rem;
+  position: relative;
+  padding-bottom: 1.2rem;
+  font-weight: 800;
+}
+
+main h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 4px;
+  box-shadow: var(--neon-glow);
+  animation: linePulse 3s ease-in-out infinite;
+}
+
+@keyframes linePulse {
+  0% {
+    width: 120px;
+    opacity: 1;
+  }
+  50% {
+    width: 150px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 120px;
+    opacity: 1;
+  }
+}
+
+/* Hobby Selection - Interactive Cards */
+.hobi-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .hobi-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  transition: var(--transition);
+  backdrop-filter: blur(8px);
+  border: var(--glass-border);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.hobi-item:hover {
+  background: rgba(99, 102, 241, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(79, 70, 229, 0.3);
+  border-color: rgba(165, 180, 252, 0.3);
+}
+
+.hobi-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary), var(--accent));
+  transition: all 0.5s ease;
+}
+
+.hobi-item:hover::before {
+  width: 8px;
 }
 
 .hobi-item input[type="checkbox"] {
-  margin-right: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--secondary);
+  border-radius: 8px;
+  margin-right: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3), 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.hobi-item input[type="checkbox"]:checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.6),
+    inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.hobi-item input[type="checkbox"]:checked::after {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.hobi-item label {
+  cursor: pointer;
+  flex: 1;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.hobi-item:hover label {
+  transform: translateX(5px);
+}
+
+/* Results Section - Animated Grid */
 #hasilHobi {
-  margin: 20px auto 0;
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  min-height: 150px;
-  transition: all 0.3s ease;
-  overflow-y: auto;
-  max-width: 90%;
-  width: 600px;
+  margin: 3rem auto 0;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius);
+  min-height: 200px;
+  transition: var(--transition);
+  overflow: hidden;
+  width: 100%;
+  border-left: 5px solid var(--primary);
+  backdrop-filter: var(--blur);
+  border: var(--glass-border);
+  position: relative;
 }
 
-ul {
-  list-style: none;
-  padding-left: 0;
+#hasilHobi::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.08) 0%,
+      transparent 100%
+    ),
+    linear-gradient(-135deg, rgba(245, 158, 11, 0.05) 0%, transparent 100%);
+  z-index: -1;
 }
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
+
+#hasilHobi ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+#hasilHobi li {
+  padding: 1.2rem 1.5rem;
+  background: rgba(79, 70, 229, 0.15);
+  border-radius: 12px;
+  transition: var(--transition);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(165, 180, 252, 0.15);
+  animation: fadeInUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#hasilHobi li:hover {
+  background: rgba(79, 70, 229, 0.25);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+  border-color: rgba(165, 180, 252, 0.4);
+}
+
+#hasilHobi li::before {
+  content: "✧";
+  color: var(--accent);
+  font-weight: bold;
+  margin-right: 12px;
+  text-shadow: var(--accent-glow);
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Submit Button - Holographic Effect */
+form {
   position: relative;
   z-index: 1;
 }
 
+form input[type="submit"] {
+  background: linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-dark),
+    var(--primary)
+  );
+  color: white;
+  padding: 1.2rem 2.5rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 3rem;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5), var(--neon-glow);
+  position: relative;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(99, 102, 241, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+}
+
+form input[type="submit"]::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  transform: rotate(30deg);
+  transition: all 0.8s ease;
+  z-index: -1;
+}
+
+form input[type="submit"]:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-dark),
+    var(--primary),
+    var(--primary-dark)
+  );
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(79, 70, 229, 0.7),
+    0 0 25px rgba(165, 180, 252, 0.6);
+}
+
+form input[type="submit"]:hover::before {
+  left: 100%;
+}
+
+form input[type="submit"]:active {
+  transform: translateY(2px) scale(0.98);
+}
+
+/* Footer - Gradient Border */
+footer {
+  background: var(--dark-bg);
+  color: var(--text-light);
+  text-align: center;
+  padding: 4rem 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  position: relative;
+  overflow: hidden;
+  border-top: var(--glass-border);
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(
+    90deg,
+    var(--primary),
+    var(--accent),
+    var(--primary)
+  );
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+  filter: drop-shadow(0 0 10px var(--primary));
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
 .social-links {
-  margin: 30px 0;
+  margin: 2.5rem 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .social-links a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 45px;
-  height: 45px;
+  width: 60px;
+  height: 60px;
   background: rgba(255, 255, 255, 0.1);
   color: white;
-  font-size: 1.2rem;
-  margin: 0 10px;
+  font-size: 1.5rem;
   border-radius: 50%;
   transition: var(--transition);
-  backdrop-filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+  border: var(--glass-border);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.social-links a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: 0.6s;
 }
 
 .social-links a:hover {
   background: white;
   color: var(--primary);
-  transform: translateY(-5px);
+  transform: translateY(-8px) rotate(10deg) scale(1.1);
+  box-shadow: 0 15px 30px rgba(165, 180, 252, 0.6), var(--neon-glow);
 }
 
-ul li::before {
-  content: "✔ ";
-  color: #a5b4fc;
-  font-weight: bold;
-  margin-right: 8px;
+.social-links a:hover::before {
+  left: 100%;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
+.copyright {
+  margin-top: 2rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
 }
 
-form input[type="submit"] {
-  background-color: #4f46e5;
-  color: white;
-  padding: 10px 20px;
-  font-weight: 600;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 15px;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
 }
 
-form input[type="submit"]:hover {
-  background-color: #3730a3;
+::-webkit-scrollbar-track {
+  background: rgba(10, 10, 20, 0.8);
 }
 
-footer {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--primary), var(--primary-light));
+  border-radius: 10px;
+  border: 3px solid rgba(10, 10, 20, 0.8);
 }
 
-/* Mobile Responsive */
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 1.5rem;
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--primary-dark), var(--primary));
+}
+
+/* Floating Cursor Effect */
+.cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(165, 180, 252, 0.7);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease,
+    background 0.3s ease;
+}
+
+.cursor-follower {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border: 2px solid rgba(165, 180, 252, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.4s ease, width 0.4s ease, height 0.4s ease,
+    border 0.4s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  main {
+    max-width: 90%;
   }
+}
 
-  nav a {
-    font-size: 0.9rem;
-    padding: 6px 10px;
+@media (max-width: 992px) {
+  header h1 {
+    font-size: 2.5rem;
   }
 
   main {
-    margin: 20px 10px;
-    padding: 20px;
+    padding: 3rem;
+    margin: 3rem auto;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+    padding: 0 1.5rem;
+  }
+
+  nav {
+    gap: 1rem;
+    padding: 0 1.5rem;
+  }
+
+  nav a {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  main {
+    padding: 2.5rem;
+    margin: 2rem auto;
+  }
+
+  .hobi-container {
+    grid-template-columns: 1fr;
+  }
+
+  #hasilHobi ul {
+    grid-template-columns: 1fr;
   }
 
   form input[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 2rem;
   }
 
-  footer {
-    font-size: 0.8rem;
+  main {
+    padding: 2rem;
+    margin: 1.5rem auto;
+  }
+
+  main h2 {
+    font-size: 1.8rem;
+  }
+
+  .social-links a {
+    width: 50px;
+    height: 50px;
+    font-size: 1.3rem;
   }
 }

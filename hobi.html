@@ -23,6 +23,7 @@
         display: flex;
         align-items: center;
         margin-bottom: 10px;
+        gap: 15px;
       }
 
       .hobi-item input[type="checkbox"] {
@@ -31,6 +32,13 @@
 
       #hasilHobi ul {
         padding-left: 20px;
+      }
+
+      /* Style untuk ikon */
+      .hobi-item i {
+        font-size: 1.2em;
+        width: 25px;
+        color: #a5b4fc;
       }
     </style>
   </head>
@@ -50,46 +58,55 @@
       <form>
         <div class="hobi-item">
           <input type="checkbox" id="menulis" value="Menulis" />
+          <i class="fas fa-pen"></i>
           <label for="menulis">Menulis</label>
         </div>
 
         <div class="hobi-item">
           <input type="checkbox" id="membaca" value="Membaca" />
+          <i class="fas fa-book"></i>
           <label for="membaca">Membaca</label>
         </div>
 
         <div class="hobi-item">
           <input type="checkbox" id="ngoding" value="Ngoding" />
+          <i class="fas fa-laptop-code"></i>
           <label for="ngoding">Ngoding</label>
         </div>
 
         <div class="hobi-item">
           <input type="checkbox" id="basket" value="Basket" />
+          <i class="fas fa-basketball-ball"></i>
           <label for="basket">Basket</label>
         </div>
 
         <div class="hobi-item">
           <input type="checkbox" id="criket" value="Criket" />
+          <i class="fas fa-baseball-ball"></i>
           <label for="criket">Criket</label>
         </div>
 
         <div class="hobi-item">
           <input type="checkbox" id="sepakbola" value="SepakBola" />
-          <label for="sepakbola">SepakBola</label>
+          <i class="fas fa-futbol"></i>
+          <label for="sepakbola">Sepak Bola</label>
         </div>
 
         <div class="hobi-item">
           <input type="checkbox" id="memasak" value="Memasak" />
+          <i class="fas fa-utensils"></i>
           <label for="memasak">Memasak</label>
         </div>
 
         <div class="hobi-item">
           <input type="checkbox" id="bermaingame" value="BermainGame" />
+          <i class="fas fa-gamepad"></i>
           <label for="bermaingame">Bermain Game</label>
         </div>
 
         <div class="hobi-item">
           <input type="checkbox" id="musik" value="BermainMusik" />
+          <i class="fas fa-guitar"></i>
           <label for="musik">Bermain Musik</label>
         </div>
 
@@ -117,11 +134,11 @@
         </div>
       </div>
     </footer>
-    <!-- Hubungkan dengan file JavaScript eksternal -->
-    <script src="script.js"></script>
+
     <script
       src="https://kit.fontawesome.com/a076d05399.js"
       crossorigin="anonymous"
     ></script>
+    <script src="script.js"></script>
   </body>
 </html>
