@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halaman Biodata</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Halaman Biodata</h1>
+      <nav>
+        <a href="index.html">Beranda</a>
+        <a href="biodata.html">Biodata</a>
+        <a href="tentang.html">Tentang Saya</a>
+        <a href="hobi.html">Hobi</a>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Isi Formulir Biodata</h2>
+      <form onsubmit="tampilkanData(event)">
+        <label for="nama">Nama Lengkap:</label><br />
+        <input type="text" id="nama" name="nama" required /><br />
+
+        <label for="ttl">Tempat, Tanggal Lahir:</label><br />
+        <input type="text" id="ttl" name="ttl" required /><br />
+
+        <label for="alamat">Alamat:</label><br />
+        <input type="text" id="alamat" name="alamat" required /><br />
+
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br />
+
+        <input type="submit" value="Kirim" />
+      </form>
+
+      <!-- Bagian hasil data -->
+      <div id="output" style="display: none; margin-top: 30px">
+        <h2>Data Biodata Anda:</h2>
+        <ul id="dataList"></ul>
+      </div>
+    </main>
+
+    <footer>© 2025 Muhammad Rifqi Alimin_20230140147</footer>
+
+    <script>
+      function tampilkanData(e) {
+        e.preventDefault();
+
+        const nama = document.getElementById("nama").value;
+        const ttl = document.getElementById("ttl").value;
+        const alamat = document.getElementById("alamat").value;
+        const email = document.getElementById("email").value;
+
+        const dataList = document.getElementById("dataList");
+        dataList.innerHTML = `
+          <li><strong>Nama Lengkap:</strong> ${nama}</li>
+          <li><strong>Tempat, Tanggal Lahir:</strong> ${ttl}</li>
+          <li><strong>Alamat:</strong> ${alamat}</li>
+          <li><strong>Email:</strong> ${email}</li>
+        `;
+
+        document.getElementById("output").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
