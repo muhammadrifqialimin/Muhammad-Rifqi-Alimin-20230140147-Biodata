@@ -26,7 +26,7 @@ function tampilkanHobi() {
   checkboxes.forEach((cb) => {
     if (cb.checked) {
       const li = document.createElement("li");
-      li.innerHTML = `✔ <strong>${cb.value}</strong>: ${
+      li.innerHTML = `> <strong>${cb.value}</strong>: ${
         deskripsiHobi[cb.value] || "Deskripsi belum tersedia"
       }`;
       daftarHobi.appendChild(li);
