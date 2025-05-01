@@ -40,12 +40,12 @@ nav {
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 nav a {
   color: #ddd;
   text-decoration: none;
-  margin: 0 15px;
   font-weight: 600;
   padding: 6px 12px;
   transition: background-color 0.3s, color 0.3s;
@@ -152,15 +152,17 @@ footer {
   }
 
   nav {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
   }
 
   nav a {
-    display: block;
-    margin: 8px 0;
-    font-size: 0.95rem;
-    width: 100%;
+    font-size: 0.9rem;
+    padding: 6px 10px;
+    margin: 4px;
+    width: auto;
     text-align: center;
   }
 
